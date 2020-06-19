@@ -1,0 +1,21 @@
+$MOBILE: screen
+	and(
+		max-width: 640px
+	);
+
+$SPINNER_COLOR: teal;
+
+$ACTIVE: gold;
+$PRIMARY: #99ffdd;
+$SECONDARY: #e6fff7;
+
+@font-face {
+	font-family: os_semibold;
+	src: url(../fonts/os_semibold.woff);
+	font-weight: 600;
+}
+
+@font-face {
+	font-family: os_bold;
+	src: url(../fonts/os_bold.woff);
+}
