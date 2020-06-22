@@ -42,23 +42,22 @@
 	// GRAPHICAL PROCESSING
 
 	// Handle positioning of the search container
-	let posBase
+	let sectionRef
 
-	$: leftMarg = 1
-	$: rightMarg = 1
+	let leftMarg
+	let width
 
 	function posHandler() {
-		leftMarg = posBase.scrollLeft
-		rightMarg = posBase.scrollWidth - posBase.offsetWidth - posBase.scrollLeft
+		leftMarg = sectionRef.scrollLeft
+		width = sectionRef.clientWidth
 	}
 
 	onMount(() => {
 		// Sort by id on the beginning
 		sortTable('id')
 
-		// Initialize positioning properties
-		leftMarg = 0
-		rightMarg = 0
+		// Initial center of the search container
+		posHandler()
 	})
 
 	// Pagination data binding
@@ -86,12 +85,8 @@
 	}
 
 	section {
-		overflow-x: hidden;
+		overflow-x: auto;
 		background: black;
-
-		@media screen and(max-width: 900px) {
-			overflow-x: auto;
-		}
 	}
 
 	table {
@@ -182,7 +177,6 @@
 	}
 
 	#chevron {
-		width: 100%;
 		cursor: pointer;
 		padding: 4px;
 		text-align: center;
@@ -245,12 +239,17 @@
 			}
 		}
 	}
+
+	// This fixes randomly appearing scrollbar when it's not needed
+	#searchContainer {
+		overflow: hidden;
+	}
 </style>
 
 <svelte:window on:resize={posHandler} />
 
 <main>
-	<section on:scroll={posHandler} bind:this={posBase}>
+	<section on:scroll={posHandler} bind:this={sectionRef}>
 		<table>
 			<thead>
 				<tr>
@@ -262,7 +261,9 @@
 
 			<tr>
 				<td colspan="100">
-					<div style="margin-left: {leftMarg}px; margin-right: {rightMarg}px;">
+					<div
+						style="margin-left: {leftMarg}px; width: {width}px;"
+						id="searchContainer">
 						<div style="display: {isSearchVisible ? 'block' : 'none'}">
 							<Search feed={data} bind:getFilteredData />
 						</div>
