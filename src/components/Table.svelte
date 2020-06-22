@@ -139,7 +139,9 @@
 				}
 
 				&:hover:not(#noResults) {
-					background: $ACTIVE;
+					@media #{$HOVER_SUPPORT} {
+						background: $ACTIVE;
+					}
 				}
 			}
 
@@ -163,7 +165,9 @@
 			font-family: os_bold;
 
 			&:hover {
-				color: $ACTIVE;
+				@media #{$HOVER_SUPPORT} {
+					color: $ACTIVE;
+				}
 			}
 		}
 
@@ -184,7 +188,9 @@
 		&:hover div {
 			&:before,
 			&:after {
-				background: $ACTIVE;
+				@media #{$HOVER_SUPPORT} {
+					background: $ACTIVE;
+				}
 			}
 		}
 

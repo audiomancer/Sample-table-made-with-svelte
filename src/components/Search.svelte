@@ -84,10 +84,12 @@
 		&[type='submit'] {
 			font-size: 20px;
 			background: $PRIMARY;
+			cursor: pointer;
 
 			&:hover {
-				cursor: pointer;
-				background: $ACTIVE;
+				@media #{$HOVER_SUPPORT} {
+					background: $ACTIVE;
+				}
 			}
 		}
 	}

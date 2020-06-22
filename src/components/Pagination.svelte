@@ -5,7 +5,7 @@
 	export let paginationEnd
 
 	const perPage = 20
-	
+
 	$: getCurrentPage = parseInt($location.replace(/^\/+/, ''))
 	$: pagesTotal = Math.ceil(feed.length / perPage)
 
@@ -77,7 +77,9 @@
 
 		.currentPage,
 		a:hover {
-			background: $ACTIVE;
+			@media #{$HOVER_SUPPORT} {
+				background: $ACTIVE;
+			}
 		}
 	}
 </style>
