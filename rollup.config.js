@@ -31,10 +31,10 @@ export default {
 		sourcemap: production ? false : true,
 		format: 'iife',
 		name: 'app',
-		file: 'docs/build/bundle.js'
+		file: 'public/build/bundle.js'
 	},
 	plugins: [
-		del({ targets: 'docs/build/*', runOnce: true }),
+		del({ targets: 'public/build/*', runOnce: true }),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
@@ -51,7 +51,7 @@ export default {
 			}),
 
 			css: (css) => {
-				css.write('docs/build/bundle.css', production ? false : true)
+				css.write('public/build/bundle.css', production ? false : true)
 			}
 		}),
 
@@ -72,9 +72,9 @@ export default {
 		// the bundle has been generated
 		!production && serve(),
 
-		// Watch the `docs` directory and refresh the
+		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('docs'),
+		!production && livereload('public'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
